@@ -1,0 +1,25 @@
+# Secrets
+.env
+*.key
+*.pem
+kubeconfig*
+
+# Python 
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache
+
+
+#Données volumineuses
+target-app/*/data/*.csv
+
+
+ #Fichiers générés par l'agent lors des tests
+runs/
+# --- Éditeurs / système ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
