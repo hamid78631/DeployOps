@@ -1,0 +1,50 @@
+# 1. L'identité de l'agent (sa carte nominative)
+#    Elle vit dans deployops-system, là où l'agent tournera.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: deployops-agent
+  namespace: deployops-system
+  labels:
+    app.kubernetes.io/part-of: deployops
+---
+# 2. La liste des droits, valable uniquement dans deployops-target
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deployops-agent
+  namespace: deployops-target
+  labels:
+    app.kubernetes.io/part-of: deployops
+rules:
+  # Déployer et exposer l'application
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["services", "configmaps", "secrets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+  # Observer et diagnostiquer (lecture seule)
+  - apiGroups: [""]
+    resources: ["pods", "pods/log", "events"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["replicasets"]
+    verbs: ["get", "list", "watch"]
+---
+# 3. Remettre la carte : relier le Role au ServiceAccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: deployops-agent
+  namespace: deployops-target
+  labels:
+    app.kubernetes.io/part-of: deployops
+subjects:
+  - kind: ServiceAccount
+    name: deployops-agent
+    namespace: deployops-system
+roleRef:
+  kind: Role
+  name: deployops-agent
+  apiGroup: rbac.authorization.k8s.io

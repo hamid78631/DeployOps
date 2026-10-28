@@ -24,3 +24,5 @@ Prérequis : Python 3.12, [uv](https://docs.astral.sh/uv/), Docker, Minikube, ku
     cp .env.example .env    # puis renseigner GROQ_API_KEY
     uv sync
     uv run deployops
+
+C
