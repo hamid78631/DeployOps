@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: deployops-target
+  labels:
+    app.kubernetes.io/part-of: deployops
+    deployops/role: target
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: deployops-system
+  labels:
+    app.kubernetes.io/part-of: deployops
+    deployops/role: system
