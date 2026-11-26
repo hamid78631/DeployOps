@@ -1,4 +1,4 @@
-# 1. L'identité de l'agent (sa carte nominative)
+# L'identité de l'agent
 #    Elle vit dans deployops-system, là où l'agent tournera.
 apiVersion: v1
 kind: ServiceAccount
@@ -8,7 +8,7 @@ metadata:
   labels:
     app.kubernetes.io/part-of: deployops
 ---
-# 2. La liste des droits, valable uniquement dans deployops-target
+# La liste des droits, valable uniquement dans deployops-target
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
