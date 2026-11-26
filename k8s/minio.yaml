@@ -1,4 +1,4 @@
-# 1. Le disque : une demande de 1 Go de stockage persistant
+# Le disque : une demande de 1 Go de stockage persistant
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -13,7 +13,7 @@ spec:
     requests:
       storage: 1Gi
 ---
-# 2. Le serveur MinIO
+#Le serveur MinIO
 apiVersion: apps/v1
 kind: Deployment
 metadata:
